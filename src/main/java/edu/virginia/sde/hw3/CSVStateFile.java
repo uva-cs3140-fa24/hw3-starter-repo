@@ -29,6 +29,10 @@ public class CSVStateFile implements StateSupplier {
         }
     }
 
+    public File getCsvFile() {
+        return csvFile;
+    }
+
     @Override
     public List<State> getStates() {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
@@ -36,7 +40,7 @@ public class CSVStateFile implements StateSupplier {
             getTargetColumnIndices(headerRow);
 
             int lineNumber = 2;
-            List<State> states = new ArrayList<State>();
+            List<State> states = new ArrayList<>();
             for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
                 try {
                     State state = getStateFromLine(line);

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 public class StateCSVFileTest {
     @Test
     public void getStates() {
-        final String TEST_CSV_FILE = "csv_test_files/states.csv";
+        final String TEST_CSV_FILE = "csv_test_files\\states.csv";
         CSVStateFile stateCSVFile = new CSVStateFile(getResource(TEST_CSV_FILE));
 
         List<State> states = stateCSVFile.getStates();
@@ -23,6 +23,7 @@ public class StateCSVFileTest {
         ), states);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private String getResource(String resourceName) {
         ClassLoader classLoader = getClass().getClassLoader();
         try {

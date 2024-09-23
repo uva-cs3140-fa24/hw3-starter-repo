@@ -20,7 +20,7 @@ class RepresentationTest {
 
     @Test
     void getRepresentatives_present() {
-        Map<State, Integer> initialMap = new HashMap<State, Integer>(
+        Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(ohio, 5)
         );
         Representation rep = new Representation(initialMap);
@@ -37,7 +37,7 @@ class RepresentationTest {
 
     @Test
     void putRepresentatives_present() {
-        Map<State, Integer> initialMap = new HashMap<State, Integer>(
+        Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(ohio, 10)
         );
         Representation rep = new Representation(initialMap);
@@ -56,7 +56,7 @@ class RepresentationTest {
 
     @Test
     void addRepresentatives_present() {
-        Map<State, Integer> initialMap = new HashMap<State, Integer>(
+        Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(ohio, 10)
         );
         Representation rep = new Representation(initialMap);
@@ -69,7 +69,7 @@ class RepresentationTest {
 
     @Test
     void getTotalRepresentatives_notEmpty() {
-        Map<State, Integer> initialMap = new HashMap<State, Integer>(
+        Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(
                         ohio, 10,
                         virginia, 5

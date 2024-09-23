@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CSVOutputFile implements OutputFile {
+public class CSVOutputFile implements OutputSource {
     private final String outputFilename;
 
     public CSVOutputFile(String outputFilename) {
@@ -29,7 +29,7 @@ public class CSVOutputFile implements OutputFile {
             List<State> sortedStates = new ArrayList<>(representation.getStates());
             sortedStates.sort(Comparator.comparing(state -> state.name()));
 
-            List<String> lines = new ArrayList<String>();
+            List<String> lines = new ArrayList<>();
             for (State state: sortedStates) {
                 lines.add(String.format("%s,%d\n", state.name(), representation.getRepresentatives(state)));
             }

@@ -13,7 +13,7 @@ public class Representation implements Iterable<State>{
     }
 
     public Representation() {
-        this(new HashMap<State, Integer>());
+        this(new HashMap<>());
     }
 
     public int size() {

@@ -13,10 +13,10 @@ public class Main {
         RepresentationFormat format = arguments.getRepresentationFormat();
         System.out.println(representation.getFormattedString(format));
 
-        Optional<OutputFile> outputFileOptional = arguments.getOutputFile();
+        Optional<OutputSource> outputFileOptional = arguments.getOutputFile();
         try {
             if (outputFileOptional.isPresent()) {
-                OutputFile outputFile = outputFileOptional.get();
+                OutputSource outputFile = outputFileOptional.get();
                 outputFile.writeToOutput(representation);
             }
         } catch (IOException e) {

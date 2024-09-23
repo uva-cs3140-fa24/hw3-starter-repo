@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Arguments {
+    public static final int DEFAULT_REPRESENTATIVES = 435;
     private final List<String> args;
 
     public Arguments(String[] args) {
@@ -25,7 +26,7 @@ public class Arguments {
 
     public int getTargetRepresentatives() {
         if (args.size() < 2) {
-            return 435;
+            return DEFAULT_REPRESENTATIVES;
         }
 
         try {
@@ -35,7 +36,7 @@ public class Arguments {
             }
             return targetRepresentatives;
         } catch (NumberFormatException e) {
-            return 435;
+            return DEFAULT_REPRESENTATIVES;
         }
     }
 
@@ -64,7 +65,7 @@ public class Arguments {
         return new Apportionment(stateSupplier, apportionmentMethod, targetRepresentatives);
     }
 
-    public Optional<OutputFile> getOutputFile() {
+    public Optional<OutputSource> getOutputFile() {
         int index = args.indexOf("--out");
         if (index == -1) {
             return Optional.empty();

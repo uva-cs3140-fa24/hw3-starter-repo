@@ -11,8 +11,7 @@ class HamiltonMethodTest {
 
 
     /**
-     * Example from HW1 Part1 Appendix
-     *
+     * Example from HW1 Part1 Appendix <br>
      * <a href="https://docs.google.com/document/d/1vs9rsE9rbOP590e01oonExrxHlbil4XwrtE7sG1fjM0/edit#heading=h.cankebxhr2i0">
      *     Link to document</a>
      */

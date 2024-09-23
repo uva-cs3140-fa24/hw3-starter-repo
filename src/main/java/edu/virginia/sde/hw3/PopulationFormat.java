@@ -11,10 +11,6 @@ public class PopulationFormat implements RepresentationFormat{
         this.displayOrder = displayOrder;
     }
 
-    public PopulationFormat() {
-        this(DisplayOrder.DESCENDING);
-    }
-
     public DisplayOrder getDisplayOrder() {
         return displayOrder;
     }
