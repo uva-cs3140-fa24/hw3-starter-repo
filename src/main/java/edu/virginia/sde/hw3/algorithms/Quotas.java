@@ -28,7 +28,7 @@ public class Quotas {
      * Returns the average population per seat in US House of Representatives
      * @param stateList a {@link List} of {@link State}s
      * @param numberOfSeats the total number of seats in the House of Representatives
-     * @return
+     * @return the average number of residents per seat for all states combined
      */
     public static double getAverageRepresentation(List<State> stateList, int numberOfSeats) {
         return (double) getTotalPopulation(stateList) / numberOfSeats;

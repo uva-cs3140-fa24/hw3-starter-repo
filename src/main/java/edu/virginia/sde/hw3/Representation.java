@@ -15,7 +15,7 @@ public class Representation implements Iterable<State>{
 
     /**
      * Allows direct injection of initial representation Map
-     * @param representation
+     * @param representation a {@link Map} of {@link State}s to integers, representing an apportionment
      */
     public Representation(Map<State, Integer> representation) {
         this.representation = representation;

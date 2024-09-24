@@ -114,7 +114,7 @@ public class CSVStateFile implements StateSupplier {
 
     /**
      * Parses a line from the CSV file into a State object
-     * @param line a {@String} line from the input csv file
+     * @param line a {@link String} line from the input csv file
      * @return {@link State}
      * @throws ArrayIndexOutOfBoundsException if the line doesn't have enough columns split by comma
      * @throws NumberFormatException if the population data is not an non-negative integer

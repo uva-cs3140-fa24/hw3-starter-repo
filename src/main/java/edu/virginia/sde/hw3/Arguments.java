@@ -84,7 +84,7 @@ public class Arguments {
 
     /**
      * Returns how to display the apportionment to the console.
-     * @returns {@link RepresentationFormat}
+     * @return {@link RepresentationFormat}
      */
     public RepresentationFormat getRepresentationFormat() {
         if (args.contains("--population")) {
