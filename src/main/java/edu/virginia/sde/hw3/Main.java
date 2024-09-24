@@ -7,7 +7,6 @@ import edu.virginia.sde.hw3.formats.PopulationFormat;
 import edu.virginia.sde.hw3.formats.RepresentationFormat;
 
 import java.io.IOException;
-import java.util.Optional;
 
 
 /**
@@ -16,7 +15,7 @@ import java.util.Optional;
  * <br>
  * This program currently supports:<br>
  * <ul>
- *     <li>Input file formats -- see sample/inputs for examples</li>
+ *     <li>Input file formats -- see sample_inputs folder for examples</li>
  *     <ul>
  *         <li>CSV files - see {@link CSVStateFile}</li>
  *     </ul>
@@ -37,32 +36,27 @@ import java.util.Optional;
  * </ul>
  */
 public class Main {
-    private static Arguments arguments;
-
     public static void main(String[] args) {
-        arguments = new Arguments(args);
+        Arguments arguments = new Arguments(args);
+
         Apportionment apportionment = arguments.getApportionment();
+
         Representation representation = apportionment.getRepresentation();
 
-        generateOutput(representation);
-    }
-
-    private static void generateOutput(Representation representation) {
         RepresentationFormat format = arguments.getRepresentationFormat();
         System.out.println(representation.getFormattedString(format));
 
-        generateFileOutput(representation);
+        arguments.getOutputFile().ifPresent(
+                outputSource -> outputToSource(representation, outputSource)
+        );
     }
 
-    private static void generateFileOutput(Representation representation) {
-        Optional<OutputSource> outputFileOptional = arguments.getOutputFile();
+    private static void outputToSource(Representation representation, OutputSource outputSource) {
         try {
-            if (outputFileOptional.isPresent()) {
-                OutputSource outputFile = outputFileOptional.get();
-                outputFile.writeToOutput(representation);
-            }
+            outputSource.writeToOutput(representation);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
