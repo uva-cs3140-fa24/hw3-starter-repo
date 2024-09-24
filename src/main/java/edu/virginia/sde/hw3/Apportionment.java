@@ -1,5 +1,7 @@
 package edu.virginia.sde.hw3;
 
+import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
+
 import java.util.List;
 
 /**

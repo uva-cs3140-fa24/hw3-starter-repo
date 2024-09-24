@@ -1,4 +1,8 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.formats;
+
+import edu.virginia.sde.hw3.DisplayOrder;
+import edu.virginia.sde.hw3.Representation;
+import edu.virginia.sde.hw3.State;
 
 import java.util.Comparator;
 
@@ -22,6 +26,10 @@ public class PopulationFormat implements RepresentationFormat{
         this.displayOrder = displayOrder;
     }
 
+    /**
+     * Gets the display order
+     * @return either {@link DisplayOrder#ASCENDING} or {@link DisplayOrder#DESCENDING}
+     */
     public DisplayOrder getDisplayOrder() {
         return displayOrder;
     }
@@ -30,7 +38,8 @@ public class PopulationFormat implements RepresentationFormat{
      * Returns a string of states sorted by population in either descending or descending order, depending on
      * the object's configuration.
      * @param representation {@link Representation} - the results of an apportionment
-     * @return
+     * @return a formatted {@link String}
+     * @see DefaultFormatStringBuilder#getSortedString(Representation, Comparator)
      */
     @Override
     public String getFormattedString(Representation representation) {

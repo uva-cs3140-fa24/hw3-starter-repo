@@ -1,4 +1,7 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.algorithms;
+
+import edu.virginia.sde.hw3.Representation;
+import edu.virginia.sde.hw3.State;
 
 import java.util.List;
 

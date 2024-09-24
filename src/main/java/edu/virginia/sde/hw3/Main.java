@@ -1,5 +1,11 @@
 package edu.virginia.sde.hw3;
 
+import edu.virginia.sde.hw3.algorithms.HamiltonMethod;
+import edu.virginia.sde.hw3.algorithms.JeffersonMethod;
+import edu.virginia.sde.hw3.formats.AlphabeticalFormat;
+import edu.virginia.sde.hw3.formats.PopulationFormat;
+import edu.virginia.sde.hw3.formats.RepresentationFormat;
+
 import java.io.IOException;
 import java.util.Optional;
 

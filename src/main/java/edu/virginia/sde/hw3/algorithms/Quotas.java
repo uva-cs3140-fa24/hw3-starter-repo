@@ -1,4 +1,6 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.algorithms;
+
+import edu.virginia.sde.hw3.State;
 
 import java.util.HashMap;
 import java.util.List;

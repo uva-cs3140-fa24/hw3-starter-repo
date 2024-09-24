@@ -1,5 +1,6 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.algorithms;
 
+import edu.virginia.sde.hw3.State;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,4 +1,6 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.formats;
+
+import edu.virginia.sde.hw3.Representation;
 
 /**
  * Describes a particular way to display a representation as a text {@link String}
