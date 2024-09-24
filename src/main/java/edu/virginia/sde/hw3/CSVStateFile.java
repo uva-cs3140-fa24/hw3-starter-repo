@@ -117,7 +117,7 @@ public class CSVStateFile implements StateSupplier {
      * @param line a {@link String} line from the input csv file
      * @return {@link State}
      * @throws ArrayIndexOutOfBoundsException if the line doesn't have enough columns split by comma
-     * @throws NumberFormatException if the population data is not an non-negative integer
+     * @throws NumberFormatException if the population data is not a non-negative integer
      */
     protected State getStateFromLine(String line) {
         String[] tokens = line.split(",");
