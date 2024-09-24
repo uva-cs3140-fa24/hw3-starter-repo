@@ -16,7 +16,7 @@ public class DefaultFormatStringBuilder {
             stringBuilder.append(String.format("%-15s|%20s|%5s\n",
                     state.name(),
                     state.population(),
-                    representation.getRepresentatives(state)));
+                    representation.getSeats(state)));
         }
         return stringBuilder.toString();
     }

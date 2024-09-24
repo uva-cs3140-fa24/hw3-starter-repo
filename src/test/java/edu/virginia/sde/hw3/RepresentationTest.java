@@ -15,7 +15,7 @@ class RepresentationTest {
     @Test
     void getRepresentatives_notPresent() {
         Representation rep = new Representation();
-        assertEquals(0, rep.getRepresentatives(ohio));
+        assertEquals(0, rep.getSeats(ohio));
     }
 
     @Test
@@ -24,34 +24,34 @@ class RepresentationTest {
                 Map.of(ohio, 5)
         );
         Representation rep = new Representation(initialMap);
-        assertEquals(5, rep.getRepresentatives(ohio));
+        assertEquals(5, rep.getSeats(ohio));
     }
 
     @Test
-    void putRepresentatives_notPresent() {
+    void setSeats_notPresent() {
         Representation rep = new Representation();
-        rep.putRepresentatives(ohio, 5);
+        rep.setSeats(ohio, 5);
 
-        assertEquals(5, rep.getRepresentatives(ohio));
+        assertEquals(5, rep.getSeats(ohio));
     }
 
     @Test
-    void putRepresentatives_present() {
+    void setSeats_present() {
         Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(ohio, 10)
         );
         Representation rep = new Representation(initialMap);
-        rep.putRepresentatives(ohio, 5);
+        rep.setSeats(ohio, 5);
 
-        assertEquals(5, rep.getRepresentatives(ohio));
+        assertEquals(5, rep.getSeats(ohio));
     }
 
     @Test
     void addRepresentatives_notPresent() {
         Representation rep = new Representation();
-        rep.addRepresentatives(ohio, 5);
+        rep.addSeats(ohio, 5);
 
-        assertEquals(5, rep.getRepresentatives(ohio));
+        assertEquals(5, rep.getSeats(ohio));
     }
 
     @Test
@@ -60,15 +60,15 @@ class RepresentationTest {
                 Map.of(ohio, 10)
         );
         Representation rep = new Representation(initialMap);
-        rep.addRepresentatives(ohio, 5);
+        rep.addSeats(ohio, 5);
 
-        assertEquals(15, rep.getRepresentatives(ohio));
+        assertEquals(15, rep.getSeats(ohio));
     }
 
 
 
     @Test
-    void getTotalRepresentatives_notEmpty() {
+    void getAllocatedSeats_notEmpty() {
         Map<State, Integer> initialMap = new HashMap<>(
                 Map.of(
                         ohio, 10,
@@ -76,12 +76,12 @@ class RepresentationTest {
                 )
         );
         Representation rep = new Representation(initialMap);
-        assertEquals(15, rep.getTotalRepresentatives());
+        assertEquals(15, rep.getAllocatedSeats());
     }
 
     @Test
-    void getTotalRepresentatives_Empty() {
+    void getAllocatedSeats_Empty() {
         Representation rep = new Representation();
-        assertEquals(0, rep.getTotalRepresentatives());
+        assertEquals(0, rep.getAllocatedSeats());
     }
 }

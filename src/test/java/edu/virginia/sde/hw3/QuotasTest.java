@@ -20,13 +20,13 @@ class QuotasTest {
     }
 
     @Test
-    void getInitialDivisor_evenlyDivisible() {
-        assertEquals(50.0, Quotas.getInitialDivisor(stateList, 10), 1e-14);
+    void getAverageRepresentation_evenlyDivisible() {
+        assertEquals(50.0, Quotas.getAverageRepresentation(stateList, 10), 1e-14);
     }
 
     @Test
-    void getInitialDivisor_notDivisible() {
-        assertEquals(71.4285714, Quotas.getInitialDivisor(stateList, 7), 1e-7);
+    void getAverageRepresentation_notDivisible() {
+        assertEquals(71.4285714, Quotas.getAverageRepresentation(stateList, 7), 1e-7);
     }
 
     @Test

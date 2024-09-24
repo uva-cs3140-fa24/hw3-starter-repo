@@ -31,7 +31,7 @@ public class CSVOutputFile implements OutputSource {
 
             List<String> lines = new ArrayList<>();
             for (State state: sortedStates) {
-                lines.add(String.format("%s,%d\n", state.name(), representation.getRepresentatives(state)));
+                lines.add(String.format("%s,%d\n", state.name(), representation.getSeats(state)));
             }
 
             for (String line : lines) {

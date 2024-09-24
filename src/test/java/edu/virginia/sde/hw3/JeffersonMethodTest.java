@@ -20,13 +20,13 @@ class JeffersonMethodTest {
         JeffersonMethod jeffersonMethod = new JeffersonMethod();
         Representation representation = jeffersonMethod.getRepresentation(stateList, 25);
 
-        assertEquals(25, representation.getTotalRepresentatives());
+        assertEquals(25, representation.getAllocatedSeats());
         assertEquals(5, representation.size());
 
-        assertEquals(0, representation.getRepresentatives(DE));
-        assertEquals(5, representation.getRepresentatives(MD));
-        assertEquals(12, representation.getRepresentatives(PA));
-        assertEquals(7, representation.getRepresentatives(VA));
-        assertEquals(1, representation.getRepresentatives(WV));
+        assertEquals(0, representation.getSeats(DE));
+        assertEquals(5, representation.getSeats(MD));
+        assertEquals(12, representation.getSeats(PA));
+        assertEquals(7, representation.getSeats(VA));
+        assertEquals(1, representation.getSeats(WV));
     }
 }

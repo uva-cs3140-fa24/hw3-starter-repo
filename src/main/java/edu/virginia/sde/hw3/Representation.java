@@ -1,56 +1,109 @@
 package edu.virginia.sde.hw3;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+/**
+ * Represents the results of an apportionment, or an allocation of seats in the US House of Representatives.
+ */
 public class Representation implements Iterable<State>{
+    /**
+     * A mapping of {@link State}s to the number of allocated seats in congress
+     */
     Map<State, Integer> representation;
 
+    /**
+     * Allows direct injection of initial representation Map
+     * @param representation
+     */
     public Representation(Map<State, Integer> representation) {
         this.representation = representation;
     }
 
+    /**
+     * Creates an initially empty representation, with no states
+     */
     public Representation() {
         this(new HashMap<>());
     }
 
+    /**
+     * Gets the number of states in the representation
+     * @return the number of states, <b>not</b> the number of seats!
+     */
     public int size() {
         return representation.size();
     }
 
-    public void putRepresentatives(State state, int numRepresentatives) {
-        representation.put(state, numRepresentatives);
+    /**
+     * Sets the number of seats for a particular {@link State}, overwriting any previous value if present
+     * @param state the state to set the number of seats for
+     * @param numberOfSeats the number of seats to allocate to the state
+     */
+    public void setSeats(State state, int numberOfSeats) {
+        representation.put(state, numberOfSeats);
     }
 
-    public void addRepresentatives(State state, int numRepresentatives) {
-        int totalRepresentatives = numRepresentatives + representation.getOrDefault(state, 0);
+    /**
+     * Adds the number of seats to a particular state. Note that this behaves the same as
+     * {@link Representation#setSeats(State, int)} when the state is not present in the representation
+     * @param state the {@link State} to add seats to
+     * @param numberOfSeats the number of seats to add to that state
+     */
+    public void addSeats(State state, int numberOfSeats) {
+        int totalRepresentatives = numberOfSeats + representation.getOrDefault(state, 0);
         representation.put(state, totalRepresentatives);
     }
 
-    public int getRepresentatives(State state) {
+    /**
+     * Get the number of seats for a particular state. Returns zero if the state isn't present.
+     * @param state the {@link State} to get the seats for.
+     * @return the number of seats assigned to the state, or zero if the state is not present.
+     */
+    public int getSeats(State state) {
         return representation.getOrDefault(state, 0);
     }
 
-    public int getTotalRepresentatives() {
-        return representation.values()
-                .stream()
-                .reduce(0, Integer::sum);
+    /**
+     * Gets the total number of seats allocated to every state
+     * @return the sum of seats allocated to all states combined
+     */
+    public int getAllocatedSeats() {
+        int totalSeats = 0;
+        for (int numberOfSeats : representation.values()) {
+            totalSeats += numberOfSeats;
+        }
+        return totalSeats;
     }
 
+    /**
+     * Return all states in the representation as a {@link Set}
+     * @return an immutable {@link Set} of {@link State}s in the representation
+     */
     public Set<State> getStates() {
-        return representation.keySet();
+        return Collections.unmodifiableSet(representation.keySet());
     }
 
+    /**
+     * Gets a string representation of the underlying data.
+     * @return {@link String}
+     */
     public String toString() {
         return representation.toString();
     }
 
+    /**
+     * Returns a formatted {@link String} to give a textual representation of the Representation object
+     * @param format {@link RepresentationFormat}
+     * @return a formatted {@link String}
+     */
     public String getFormattedString(RepresentationFormat format) {
         return format.getFormattedString(this);
     }
 
+    /**
+     * Returns an iterator over the set of {@link State}s in the Representation
+     * @return an {@link Iterator}
+     */
     @Override
     public Iterator<State> iterator() {
         return representation.keySet().iterator();

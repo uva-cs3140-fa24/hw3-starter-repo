@@ -28,13 +28,13 @@ class HamiltonMethodTest {
         HamiltonMethod hamiltonMethod = new HamiltonMethod();
         Representation representation = hamiltonMethod.getRepresentation(stateList, 25);
 
-        assertEquals(25, representation.getTotalRepresentatives());
+        assertEquals(25, representation.getAllocatedSeats());
         assertEquals(5, representation.size());
 
-        assertEquals(1, representation.getRepresentatives(DE));
-        assertEquals(5, representation.getRepresentatives(MD));
-        assertEquals(11, representation.getRepresentatives(PA));
-        assertEquals(7, representation.getRepresentatives(VA));
-        assertEquals(1, representation.getRepresentatives(WV));
+        assertEquals(1, representation.getSeats(DE));
+        assertEquals(5, representation.getSeats(MD));
+        assertEquals(11, representation.getSeats(PA));
+        assertEquals(7, representation.getSeats(VA));
+        assertEquals(1, representation.getSeats(WV));
     }
 }
