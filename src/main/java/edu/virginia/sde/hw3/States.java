@@ -7,6 +7,7 @@ import java.util.*;
  * on this group of States.
  */
 public class States {
+    /** The collection of states */
     private final List<State> states;
 
     /**
