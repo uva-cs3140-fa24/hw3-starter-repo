@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,14 +14,19 @@ import java.util.Optional;
  *     <li>"State" - the column containing the names of the states</li>
  *     <li>"Population" - the column containing the populations of each state</li>
  * </ul>
- * See sample_inputs/states.csv and sample_inputs/part2_input.csv for examples
+ * See sample_inputs/part1_input.csv and sample_inputs/part2_input.csv for examples
  */
 public class CSVStateFile implements StateSupplier {
+    /** Required Column Header for State Name */
     private final static String STATE_NAME_COLUMN_LABEL = "State";
+
+    /** Required Column Header for State Population */
     private final static String STATE_POPULATION_COLUMN_LABEL = "Population";
 
     /** the CSV file */
     private final File csvFile;
+
+    private int numberOfColumns;
 
     /** the column index of the "State" column containing state names */
     private int stateNameColumnIndex = -1;
@@ -62,48 +68,73 @@ public class CSVStateFile implements StateSupplier {
     @Override
     public States getStates() {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
-            String headerRow = bufferedReader.readLine();
-            getTargetColumnIndices(headerRow);
-
-            int lineNumber = 2;
-            States states = new States();
-            for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
-                Optional<State> state = getStateFromLine(line, lineNumber);
-                if (state.isEmpty()) {
-                    continue;
-                }
-                state.ifPresent(s-> states.add(s));
-                lineNumber++;
-            }
-            return states;
+            getHeaderInformation(bufferedReader);
+            return getStatesFromContents(bufferedReader);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    /**
-     * Sets the value of {@link CSVStateFile#stateNameColumnIndex} and {@link CSVStateFile#statePopulationColumnIndex}
-     * @param headerRow the first row of the CSV file
-     * @throws IllegalArgumentException if file is missing either "State" or "Population" column heading
-     */
-    private void getTargetColumnIndices(String headerRow) {
+    private void getHeaderInformation(BufferedReader bufferedReader) throws IOException {
+        String headerRow = bufferedReader.readLine();
+        numberOfColumns = headerRow.split(",").length;
+        getTargetColumnIndices(headerRow);
+    }
+
+    private void getTargetColumnIndices(String headerRow) throws MissingColumnHeadersException {
         String[] headerRowSplit = headerRow.trim().split(",");
         for (int columnIndex = 0; columnIndex < headerRowSplit.length; columnIndex++) {
             String heading = headerRowSplit[columnIndex].trim();
-            if (heading.equals(STATE_NAME_COLUMN_LABEL) && stateNameColumnIndex == -1) {
+            if (isStateNameHeader(heading)) {
                 stateNameColumnIndex = columnIndex;
             }
-            if (heading.equals(STATE_POPULATION_COLUMN_LABEL) && statePopulationColumnIndex == -1) {
+            if (isStatePopulationHeader(heading)) {
                 statePopulationColumnIndex = columnIndex;
             }
         }
-        if (stateNameColumnIndex == -1 || statePopulationColumnIndex == -1) {
-            throw new IllegalArgumentException("Input file does not have correct column headers. " +
-                    "Missing column labeled "+ STATE_NAME_COLUMN_LABEL +" and/or "+STATE_POPULATION_COLUMN_LABEL+".");
+
+        List<String> missingLabels = new ArrayList<>();
+        if (stateNameColumnIndex == -1) {
+            missingLabels.add(STATE_NAME_COLUMN_LABEL);
+        }
+
+        if (statePopulationColumnIndex == -1) {
+            missingLabels.add(STATE_POPULATION_COLUMN_LABEL);
+        }
+
+        if (!missingLabels.isEmpty()) {
+            throw new MissingColumnHeadersException(missingLabels.toArray(new String[0]));
         }
     }
 
+    private boolean isStateNameHeader(String heading) {
+        return heading.equals(STATE_NAME_COLUMN_LABEL) && stateNameColumnIndex == -1;
+    }
+
+    private boolean isStatePopulationHeader(String heading) {
+        return heading.equals(STATE_POPULATION_COLUMN_LABEL) && statePopulationColumnIndex == -1;
+    }
+
+    private States getStatesFromContents(BufferedReader bufferedReader) throws IOException {
+        int lineNumber = 2; // starting on the line *after* the header row
+        States states = new States();
+        for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+            Optional<State> state = getStateFromLine(line, lineNumber);
+            if (state.isEmpty()) {
+                continue;
+            }
+            state.ifPresent(s-> states.add(s));
+            lineNumber++;
+        }
+        return states;
+    }
+
     private Optional<State> getStateFromLine(String line, int lineNumber) {
+        if (line.split(",").length != numberOfColumns) {
+            printBadLineFormatWarning(line, lineNumber);
+            return Optional.empty();
+        }
+
         Optional<State> state;
         try {
             state = Optional.of(getStateFromLine(line));
@@ -113,9 +144,15 @@ public class CSVStateFile implements StateSupplier {
         } catch (NumberFormatException e) {
             printBadPopulationWarning(line, lineNumber);
             return Optional.empty();
-
         }
         return state;
+    }
+
+    private static void printBadLineFormatWarning(String line, int lineNumber) {
+        System.out.printf("""
+                Warning: Bad line format on line #%d - line = "%s"
+                    Skipping line %d
+                %n""", lineNumber, line, lineNumber);
     }
 
     /**
@@ -133,13 +170,6 @@ public class CSVStateFile implements StateSupplier {
             throw new NumberFormatException("State population cannot be negative.");
         }
         return new State(stateName, statePopulation);
-    }
-
-    private static void printBadLineFormatWarning(String line, int lineNumber) {
-        System.out.printf("""
-                Warning: Bad line format on line #%d - line = "%s"
-                    Skipping line %d
-                %n""", lineNumber, line, lineNumber);
     }
 
     private static void printBadPopulationWarning(String line, int lineNumber) {

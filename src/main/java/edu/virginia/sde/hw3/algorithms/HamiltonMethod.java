@@ -4,7 +4,9 @@ import edu.virginia.sde.hw3.Representation;
 import edu.virginia.sde.hw3.State;
 import edu.virginia.sde.hw3.States;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -29,16 +31,23 @@ public class HamiltonMethod implements ApportionmentMethod {
             throw new IllegalArgumentException("Number of representatives must be greater than zero!");
         }
 
+        //allocate initial representatives
         var divisor = states.getAverageRepresentation(numRepresentatives);
         var initialRepresentation = states.getRoundedDownQuotas(divisor);
         var representation = new Representation(initialRepresentation);
 
+
+        //allocate "bonus" representatives by largest remainder first
         var remainders = states.getRemainders(divisor);
         var remainingRepresentatives = numRepresentatives - representation.getAllocatedSeats();
-        remainders.entrySet().stream()
-                .sorted(Comparator.comparing(Entry<State, Double>::getValue).reversed())
-                .limit(remainingRepresentatives)
-                .forEach(entry -> representation.addSeats(entry.getKey(), 1));
+
+        var remainderEntries = new ArrayList<>(remainders.entrySet());
+        remainderEntries.sort(Entry.<State, Double>comparingByValue().reversed());
+
+        for (int index = 0; index < remainingRepresentatives; index++) {
+            State state = remainderEntries.get(index).getKey();
+            representation.addSeats(state, 1);
+        }
 
         return representation;
     }

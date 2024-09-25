@@ -38,14 +38,15 @@ public class JeffersonMethod implements ApportionmentMethod {
             double midDivisor = (highDivisor + lowDivisor) / 2;
             Map<State, Integer> roundedDownQuotas = states.getRoundedDownQuotas(midDivisor);
             Representation representation = new Representation(roundedDownQuotas);
-            if (representation.getAllocatedSeats() == numRepresentatives) {
-                return representation;
-            } else if (representation.getAllocatedSeats() > numRepresentatives) {
+
+            if (representation.getAllocatedSeats() > numRepresentatives) {
                 lowDivisor = midDivisor;
             } else if (representation.getAllocatedSeats() < numRepresentatives) {
                 highDivisor = midDivisor;
+            } else {
+                return representation;
             }
         }
-        throw new IllegalArgumentException("Unsolvable Apportionment with the given parameters");
+        throw new UnsolvableApportionmentException("Unsolvable Apportionment with the given parameters");
     }
 }
