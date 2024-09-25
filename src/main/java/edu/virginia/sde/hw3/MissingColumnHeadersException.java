@@ -9,7 +9,9 @@ public class MissingColumnHeadersException extends IllegalArgumentException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Input file does not have correct column headers.\nMissing column labels:\n");
         for (String value : values) {
-            stringBuilder.append(" - " + value + "\n");
+            stringBuilder.append(" - ")
+                    .append(value)
+                    .append("\n");
         }
         return stringBuilder.toString();
     }

@@ -5,8 +5,6 @@ import edu.virginia.sde.hw3.State;
 import edu.virginia.sde.hw3.States;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 
