@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CSVFormat implements RepresentationFormat{
+public class CSVOutputFormat implements RepresentationFormat{
 
     @Override
     public String getFormattedString(Representation representation) {

@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents an input CSV file for states. Specifically, this file must contain the column headers:
@@ -60,28 +60,19 @@ public class CSVStateFile implements StateSupplier {
      * @return a {@link List} of {@link State} objects
      */
     @Override
-    public List<State> getStates() {
+    public States getStates() {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
             String headerRow = bufferedReader.readLine();
             getTargetColumnIndices(headerRow);
 
             int lineNumber = 2;
-            List<State> states = new ArrayList<>();
+            States states = new States();
             for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
-                try {
-                    State state = getStateFromLine(line);
-                    states.add(state);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.printf("""
-                            Warning: Bad line format on line #%d - line = "%s"
-                                Skipping line %d
-                            %n""", lineNumber, line, lineNumber);
-                } catch (NumberFormatException e) {
-                    System.out.printf("""
-                            Warning: Bad population format on line #%d - line = "%s"
-                                Skipping line %d
-                            %n""", lineNumber, line, lineNumber);
+                Optional<State> state = getStateFromLine(line, lineNumber);
+                if (state.isEmpty()) {
+                    continue;
                 }
+                state.ifPresent(s-> states.add(s));
                 lineNumber++;
             }
             return states;
@@ -112,6 +103,21 @@ public class CSVStateFile implements StateSupplier {
         }
     }
 
+    private Optional<State> getStateFromLine(String line, int lineNumber) {
+        Optional<State> state;
+        try {
+            state = Optional.of(getStateFromLine(line));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printBadLineFormatWarning(line, lineNumber);
+            return Optional.empty();
+        } catch (NumberFormatException e) {
+            printBadPopulationWarning(line, lineNumber);
+            return Optional.empty();
+
+        }
+        return state;
+    }
+
     /**
      * Parses a line from the CSV file into a State object
      * @param line a {@link String} line from the input csv file
@@ -127,5 +133,19 @@ public class CSVStateFile implements StateSupplier {
             throw new NumberFormatException("State population cannot be negative.");
         }
         return new State(stateName, statePopulation);
+    }
+
+    private static void printBadLineFormatWarning(String line, int lineNumber) {
+        System.out.printf("""
+                Warning: Bad line format on line #%d - line = "%s"
+                    Skipping line %d
+                %n""", lineNumber, line, lineNumber);
+    }
+
+    private static void printBadPopulationWarning(String line, int lineNumber) {
+        System.out.printf("""
+                Warning: Bad population format on line #%d - line = "%s"
+                    Skipping line %d
+                %n""", lineNumber, line, lineNumber);
     }
 }

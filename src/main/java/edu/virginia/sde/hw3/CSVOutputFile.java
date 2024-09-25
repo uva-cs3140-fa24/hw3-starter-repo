@@ -1,6 +1,6 @@
 package edu.virginia.sde.hw3;
 
-import edu.virginia.sde.hw3.formats.CSVFormat;
+import edu.virginia.sde.hw3.formats.CSVOutputFormat;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -50,7 +50,7 @@ public class CSVOutputFile implements OutputSource {
     @Override
     public void writeToOutput(Representation representation) throws IOException {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilename))) {
-            String fileContents = representation.getFormattedString(new CSVFormat());
+            String fileContents = representation.getFormattedString(new CSVOutputFormat());
             writer.write(fileContents);
         }
     }

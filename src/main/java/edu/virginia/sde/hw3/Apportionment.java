@@ -2,8 +2,6 @@ package edu.virginia.sde.hw3;
 
 import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
 
-import java.util.List;
-
 /**
  * This class processes the Apportionment by getting the list of states from the {@link StateSupplier} and calling the
  * {@link ApportionmentMethod} to get the {@link Representation}.
@@ -39,7 +37,7 @@ public class Apportionment {
      * @return {@link Representation}
      */
     public Representation getRepresentation() {
-        List<State> states = stateSupplier.getStates();
+        States states = stateSupplier.getStates();
         return apportionmentMethod.getRepresentation(states, targetRepresentatives);
     }
 }

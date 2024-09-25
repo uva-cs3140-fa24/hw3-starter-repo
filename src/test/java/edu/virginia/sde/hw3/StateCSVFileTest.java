@@ -13,14 +13,14 @@ public class StateCSVFileTest {
         final String TEST_CSV_FILE = "csv_test_files\\states.csv";
         CSVStateFile stateCSVFile = new CSVStateFile(getResource(TEST_CSV_FILE));
 
-        List<State> states = stateCSVFile.getStates();
+        States states = stateCSVFile.getStates();
         assertIterableEquals(List.of(
                 new State("Delaware", 989948),
                 new State("Maryland", 6177224),
                 new State("Pennsylvania", 13002700),
                 new State("Virginia", 8631393),
                 new State("West Virginia", 1793716)
-        ), states);
+        ), states.getStatesList());
     }
 
     @SuppressWarnings("SameParameterValue")

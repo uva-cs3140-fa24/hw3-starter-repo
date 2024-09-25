@@ -2,6 +2,7 @@ package edu.virginia.sde.hw3.algorithms;
 
 import edu.virginia.sde.hw3.Representation;
 import edu.virginia.sde.hw3.State;
+import edu.virginia.sde.hw3.States;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,9 +19,9 @@ class JeffersonMethodTest {
         State VA = new State("Virginia", 8631393);
         State WV = new State("West Virginia", 1793716);
 
-        List<State> stateList = List.of(DE, MD, PA, VA, WV);
+        States states = new States(List.of(DE, MD, PA, VA, WV));
         JeffersonMethod jeffersonMethod = new JeffersonMethod();
-        Representation representation = jeffersonMethod.getRepresentation(stateList, 25);
+        Representation representation = jeffersonMethod.getRepresentation(states, 25);
 
         assertEquals(25, representation.getAllocatedSeats());
         assertEquals(5, representation.size());
