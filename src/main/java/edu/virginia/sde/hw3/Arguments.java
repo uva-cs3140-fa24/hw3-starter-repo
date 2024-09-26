@@ -4,8 +4,13 @@ import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
 import edu.virginia.sde.hw3.algorithms.HamiltonMethod;
 import edu.virginia.sde.hw3.algorithms.JeffersonMethod;
 import edu.virginia.sde.hw3.formats.AlphabeticalFormat;
+import edu.virginia.sde.hw3.formats.DisplayOrder;
 import edu.virginia.sde.hw3.formats.PopulationFormat;
 import edu.virginia.sde.hw3.formats.RepresentationFormat;
+import edu.virginia.sde.hw3.io.CSVOutputFile;
+import edu.virginia.sde.hw3.io.CSVInputFile;
+import edu.virginia.sde.hw3.io.OutputSource;
+import edu.virginia.sde.hw3.io.StateSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +22,12 @@ import java.util.Optional;
  * is generated.
  */
 public class Arguments {
+    /** The position in the args array of the required input filename argument */
+    public static final int INPUT_FILENAME_POSITION = 0;
+
+    /** The position in the args array of the optional representatives argument */
+    public static final int REPRESENTATIVES_ARGUMENT_POSITION = 1;
+
     /** the default number of seats in the US House of representatives */
     public static final int DEFAULT_REPRESENTATIVES = 435;
 
@@ -36,33 +47,40 @@ public class Arguments {
 
     /**
      * Returns the StateSupplier with access to the data source that the state population data is pulled from.
-     * @return {@link StateSupplier}
+     * @return {@link StateSource}
      * @throws IllegalArgumentException if unsupported file format used
      */
-    public StateSupplier getStateSupplier() {
-        String filename = args.getFirst();
-        if (filename.endsWith(".csv")) {
-            return new CSVStateFile(filename);
+    public StateSource getStateSupplier() {
+        String filename = args.get(INPUT_FILENAME_POSITION);
+        if (filename.toLowerCase().endsWith(".csv")) {
+            return new CSVInputFile(filename);
         }
-        throw new IllegalArgumentException("Unsupported input file type: " + filename + "\n" +
-                "\tThis program currently only supports CSV files");
+
+        throw new IllegalArgumentException(String.format("""
+                Unsupported input file: %s
+                    This program currently supports the following input file formats:
+                        - .csv files
+                """, filename));
     }
 
     /**
      * Returns the number of representatives to apportion for the House of Representatives. By default, the House
-     * of Representatives has 435 representatives.
+     * of Representatives has 435 representatives. This is an optional position argument.
      * @return number of representatives to allocate
      * @throws IllegalArgumentException if non-positive number of representatives passed in.
+     * @see Arguments#REPRESENTATIVES_ARGUMENT_POSITION
      */
     public int getTargetRepresentatives() {
-        if (args.size() < 2) {
+        if (args.size() < REPRESENTATIVES_ARGUMENT_POSITION + 1) {
             return DEFAULT_REPRESENTATIVES;
         }
 
         try {
-            int targetRepresentatives = Integer.parseInt(args.get(1));
+            int targetRepresentatives = Integer.parseInt(args.get(REPRESENTATIVES_ARGUMENT_POSITION));
             if (targetRepresentatives <= 0) {
-                throw new IllegalArgumentException("Target representatives must be a positive integer");
+                throw new IllegalArgumentException(
+                        "Invalid representative argument: the target representatives must be a positive integer"
+                );
             }
             return targetRepresentatives;
         } catch (NumberFormatException e) {
@@ -72,7 +90,7 @@ public class Arguments {
 
     /**
      * Gets the apportionment algorithm to use. By default, we use {@link JeffersonMethod the Jefferson Method}, but
-     * the {@link HamiltonMethod can be selected with the --hamilton flag}
+     * the {@link HamiltonMethod can be selected with the --hamilton flag in the command line arguments}
      * @return {@link ApportionmentMethod}
      */
     public ApportionmentMethod getApportionmentMethod() {
@@ -98,15 +116,15 @@ public class Arguments {
     }
 
     /**
-     * Returns an assembled Apportionment object using {@link StateSupplier}, {@link ApportionmentMethod}, and
+     * Returns an assembled Apportionment object using {@link StateSource}, {@link ApportionmentMethod}, and
      * the target number of representatives
      * @return {@link Apportionment}
      */
     public Apportionment getApportionment() {
-        StateSupplier stateSupplier = getStateSupplier();
+        StateSource stateSource = getStateSupplier();
         ApportionmentMethod apportionmentMethod = getApportionmentMethod();
         int targetRepresentatives = getTargetRepresentatives();
-        return new Apportionment(stateSupplier, apportionmentMethod, targetRepresentatives);
+        return new Apportionment(stateSource, apportionmentMethod, targetRepresentatives);
     }
 
     /**
@@ -119,12 +137,16 @@ public class Arguments {
             return Optional.empty();
         }
         if (args.size() < index + 1) {
-            throw new IllegalArgumentException("No file specified after out");
+            throw new IllegalArgumentException("No file specified after --out argument");
         }
 
         String outputFilename = args.get(index + 1);
         if (!outputFilename.endsWith(".csv")) {
-            throw new IllegalArgumentException("Unsupported Output file format. Currently only .csv supported");
+            throw new IllegalArgumentException(String.format("""
+                Unsupported input file: %s
+                    This program currently supports the following input file formats:
+                        - .csv files
+                """, outputFilename));
         }
         return Optional.of(new CSVOutputFile(outputFilename));
     }

@@ -8,21 +8,27 @@ import java.util.*;
  */
 public class States {
     /** The collection of states */
-    private final List<State> states;
+    private final Set<State> states;
+    private final Set<String> stateNames;
 
     /**
      * Create a group of states initially population with
      * @param states the initial collection of States
      */
-    public States(List<State> states) {
+    public States(Set<State> states) {
         this.states = states;
+        this.stateNames = new HashSet<>();
+        for (State state : states) {
+            stateNames.add(state.name());
+        }
     }
 
     /**
      * Create an empty group of states
      */
     public States() {
-        this.states = new ArrayList<>();
+        this.states = new HashSet<>();
+        stateNames = new HashSet<>();
     }
 
     /**
@@ -30,7 +36,11 @@ public class States {
      * @param state the new {@link State} to add
      */
     public void add(State state) {
+        if (stateNames.contains(state.name())) {
+            throw new DuplicateStateNameException(state, this);
+        }
         states.add(state);
+        stateNames.add(state.name());
     }
 
     /**
@@ -39,6 +49,30 @@ public class States {
      */
     public boolean isEmpty() {
         return states.isEmpty();
+    }
+
+    /**
+     * Computes the number of states in the collection.
+     * @return the number of states
+     */
+    public int size() {
+        return states.size();
+    }
+
+    /**
+     * Returns an unmodifiable view of the set of states.
+     * @return an unmodifiable set containing all the states.
+     */
+    public Set<State> getStates() {
+        return Collections.unmodifiableSet(states);
+    }
+
+    /**
+     * Returns a set of state names in the collection.
+     * @return an unmodifiable set containing the names of all states
+     */
+    public Set<String> getStateNames() {
+        return Collections.unmodifiableSet(stateNames);
     }
 
     /**
@@ -105,9 +139,5 @@ public class States {
             remainders.put(state,  quotas.get(state) - Math.floor(quotas.get(state)));
         }
         return remainders;
-    }
-
-    public List<State> getStatesList() {
-        return Collections.unmodifiableList(states);
     }
 }

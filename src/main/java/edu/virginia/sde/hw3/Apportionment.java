@@ -1,14 +1,16 @@
 package edu.virginia.sde.hw3;
 
 import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
+import edu.virginia.sde.hw3.algorithms.UnsolvableApportionmentException;
+import edu.virginia.sde.hw3.io.StateSource;
 
 /**
- * This class processes the Apportionment by getting the list of states from the {@link StateSupplier} and calling the
+ * This class processes the Apportionment by getting the list of states from the {@link StateSource} and calling the
  * {@link ApportionmentMethod} to get the {@link Representation}.
  */
 public class Apportionment {
     /** The data source for state information */
-    private final StateSupplier stateSupplier;
+    private final StateSource stateSource;
 
     /** The apportionment algorithm to use */
     private final ApportionmentMethod apportionmentMethod;
@@ -18,16 +20,16 @@ public class Apportionment {
 
     /**
      * Creates an Apportionment object
-     * @param stateSupplier the data source for state information
+     * @param stateSource the data source for state information
      * @param apportionmentMethod the apportionment algorithm to use
      * @param targetRepresentatives the number of representatives to allocate
      */
     public Apportionment(
-            StateSupplier stateSupplier,
+            StateSource stateSource,
             ApportionmentMethod apportionmentMethod,
             int targetRepresentatives
     ) {
-        this.stateSupplier = stateSupplier;
+        this.stateSource = stateSource;
         this.apportionmentMethod = apportionmentMethod;
         this.targetRepresentatives = targetRepresentatives;
     }
@@ -37,7 +39,12 @@ public class Apportionment {
      * @return {@link Representation}
      */
     public Representation getRepresentation() {
-        States states = stateSupplier.getStates();
+        States states = stateSource.getStates();
+        if (states.isEmpty() || states.getTotalPopulation() <= 0) {
+            String errorMessage = "Cannot apportion representatives as no states with a positive population were provided";
+            throw new UnsolvableApportionmentException(errorMessage);
+        }
+
         return apportionmentMethod.getRepresentation(states, targetRepresentatives);
     }
 }

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Generates the text for outputting the result of an apportionment ({@link Representation}) to a CSV file
+ * sorted alphabetically.
+ */
 public class CSVOutputFormat implements RepresentationFormat{
 
     @Override

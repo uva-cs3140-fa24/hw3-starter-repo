@@ -24,7 +24,7 @@ public class JeffersonMethod implements ApportionmentMethod {
      */
     @Override
     public Representation getRepresentation(States states, int numRepresentatives) {
-        if (states.isEmpty()) {
+        if (states.isEmpty() || states.getTotalPopulation() == 0) {
             throw new IllegalArgumentException("No states provided! Cannot generate Representation map");
         }
         if (numRepresentatives <= 0) {

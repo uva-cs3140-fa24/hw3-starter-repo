@@ -31,7 +31,7 @@ public class DefaultFormatStringBuilder {
      * @param stateComparator how the states are sorted in the table
      * @return a formatted {@link String}
      */
-    String getSortedString(Representation representation, Comparator<State> stateComparator) {
+    String getSortedFormattedString(Representation representation, Comparator<State> stateComparator) {
         List<State> states = new ArrayList<>(representation.getStates());
 
         states.sort(stateComparator);

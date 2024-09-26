@@ -4,8 +4,13 @@ import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
 import edu.virginia.sde.hw3.algorithms.HamiltonMethod;
 import edu.virginia.sde.hw3.algorithms.JeffersonMethod;
 import edu.virginia.sde.hw3.formats.AlphabeticalFormat;
+import edu.virginia.sde.hw3.formats.DisplayOrder;
 import edu.virginia.sde.hw3.formats.PopulationFormat;
 import edu.virginia.sde.hw3.formats.RepresentationFormat;
+import edu.virginia.sde.hw3.io.CSVOutputFile;
+import edu.virginia.sde.hw3.io.CSVInputFile;
+import edu.virginia.sde.hw3.io.OutputSource;
+import edu.virginia.sde.hw3.io.StateSource;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -23,9 +28,9 @@ public class ArgumentsTest {
 
         assertEquals(Arguments.DEFAULT_REPRESENTATIVES, arguments.getTargetRepresentatives());
 
-        StateSupplier stateSupplier = arguments.getStateSupplier();
-        assertInstanceOf(CSVStateFile.class, stateSupplier);
-        String filename = ((CSVStateFile) stateSupplier).getCsvFile().getPath();
+        StateSource stateSource = arguments.getStateSupplier();
+        assertInstanceOf(CSVInputFile.class, stateSource);
+        String filename = ((CSVInputFile) stateSource).getCsvFile().getPath();
         assertTrue(filename.endsWith(TEST_CSV_LOCATION),
                 "Bad filename: " + filename);
 
@@ -46,9 +51,9 @@ public class ArgumentsTest {
 
         assertEquals(Arguments.DEFAULT_REPRESENTATIVES, arguments.getTargetRepresentatives());
 
-        StateSupplier stateSupplier = arguments.getStateSupplier();
-        assertInstanceOf(CSVStateFile.class, stateSupplier);
-        String filename = ((CSVStateFile) stateSupplier).getCsvFile().getPath();
+        StateSource stateSource = arguments.getStateSupplier();
+        assertInstanceOf(CSVInputFile.class, stateSource);
+        String filename = ((CSVInputFile) stateSource).getCsvFile().getPath();
         assertTrue(filename.endsWith(TEST_CSV_LOCATION),
                 "Bad filename: " + filename);
 
@@ -69,9 +74,9 @@ public class ArgumentsTest {
 
         assertEquals(100, arguments.getTargetRepresentatives());
 
-        StateSupplier stateSupplier = arguments.getStateSupplier();
-        assertInstanceOf(CSVStateFile.class, stateSupplier);
-        String filename = ((CSVStateFile) stateSupplier).getCsvFile().getPath();
+        StateSource stateSource = arguments.getStateSupplier();
+        assertInstanceOf(CSVInputFile.class, stateSource);
+        String filename = ((CSVInputFile) stateSource).getCsvFile().getPath();
         assertTrue(filename.endsWith(TEST_CSV_LOCATION),
                 "Bad filename: " + filename);
 
@@ -96,9 +101,9 @@ public class ArgumentsTest {
 
         assertEquals(100, arguments.getTargetRepresentatives());
 
-        StateSupplier stateSupplier = arguments.getStateSupplier();
-        assertInstanceOf(CSVStateFile.class, stateSupplier);
-        String filename = ((CSVStateFile) stateSupplier).getCsvFile().getPath();
+        StateSource stateSource = arguments.getStateSupplier();
+        assertInstanceOf(CSVInputFile.class, stateSource);
+        String filename = ((CSVInputFile) stateSource).getCsvFile().getPath();
         assertTrue(filename.endsWith(TEST_CSV_LOCATION),
                 "Bad filename: " + filename);
 
@@ -121,9 +126,9 @@ public class ArgumentsTest {
 
         assertEquals(Arguments.DEFAULT_REPRESENTATIVES, arguments.getTargetRepresentatives());
 
-        StateSupplier stateSupplier = arguments.getStateSupplier();
-        assertInstanceOf(CSVStateFile.class, stateSupplier);
-        String filename = ((CSVStateFile) stateSupplier).getCsvFile().getPath();
+        StateSource stateSource = arguments.getStateSupplier();
+        assertInstanceOf(CSVInputFile.class, stateSource);
+        String filename = ((CSVInputFile) stateSource).getCsvFile().getPath();
         assertTrue(filename.endsWith(TEST_CSV_LOCATION),
                 "Bad filename: " + filename);
 

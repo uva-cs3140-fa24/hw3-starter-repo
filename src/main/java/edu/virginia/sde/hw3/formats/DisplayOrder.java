@@ -1,6 +1,4 @@
-package edu.virginia.sde.hw3;
-
-import edu.virginia.sde.hw3.formats.RepresentationFormat;
+package edu.virginia.sde.hw3.formats;
 
 /**
  * Displays the sorting order for {@link RepresentationFormat}s

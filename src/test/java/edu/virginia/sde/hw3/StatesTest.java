@@ -3,10 +3,10 @@ package edu.virginia.sde.hw3;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StatesTest {
 
@@ -18,8 +18,34 @@ class StatesTest {
 
     @BeforeEach
     void setUp() {
-        List<State> initialStateList = new ArrayList<>(List.of(OH, VA, DE));
+        Set<State> initialStateList = new HashSet<>(Set.of(OH, VA, DE));
         states = new States(initialStateList);
+    }
+
+    @Test
+    void add_newState_valid() {
+        State md = new State("Maryland", 125);
+        states.add(md);
+
+        Set<State> statesSet = states.getStates();
+        assertEquals(4, statesSet.size());
+        assertTrue(statesSet.contains(md));
+        assertTrue(states.getStateNames().contains("Maryland"));
+    }
+
+    @Test
+    void add_newState_invalidDuplicateName() {
+        State virginia2 = new State("Virginia", 125);
+
+        DuplicateStateNameException exception = assertThrows(DuplicateStateNameException.class, () -> {
+            states.add(virginia2);
+        });
+
+        assertEquals(exception.getAddedState(), virginia2);
+
+        Set<State> postStates = states.getStates();
+        assertEquals(3, postStates.size());
+        assertFalse(postStates.contains(virginia2));
     }
 
     @Test

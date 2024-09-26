@@ -5,6 +5,9 @@ import edu.virginia.sde.hw3.algorithms.JeffersonMethod;
 import edu.virginia.sde.hw3.formats.AlphabeticalFormat;
 import edu.virginia.sde.hw3.formats.PopulationFormat;
 import edu.virginia.sde.hw3.formats.RepresentationFormat;
+import edu.virginia.sde.hw3.io.CSVOutputFile;
+import edu.virginia.sde.hw3.io.CSVInputFile;
+import edu.virginia.sde.hw3.io.OutputSource;
 
 import java.io.IOException;
 
@@ -17,7 +20,7 @@ import java.io.IOException;
  * <ul>
  *     <li>Input file formats -- see sample_inputs folder for examples</li>
  *     <ul>
- *         <li>CSV files - see {@link CSVStateFile}</li>
+ *         <li>CSV files - see {@link CSVInputFile}</li>
  *     </ul>
  *     <li>Apportionment Methods</li>
  *     <ul>

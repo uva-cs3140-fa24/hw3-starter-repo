@@ -1,4 +1,6 @@
-package edu.virginia.sde.hw3;
+package edu.virginia.sde.hw3.io;
+
+import edu.virginia.sde.hw3.Representation;
 
 import java.io.IOException;
 

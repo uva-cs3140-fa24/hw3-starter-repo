@@ -1,6 +1,5 @@
 package edu.virginia.sde.hw3.formats;
 
-import edu.virginia.sde.hw3.DisplayOrder;
 import edu.virginia.sde.hw3.Representation;
 import edu.virginia.sde.hw3.State;
 
@@ -39,7 +38,7 @@ public class PopulationFormat implements RepresentationFormat{
      * the object's configuration.
      * @param representation {@link Representation} - the results of an apportionment
      * @return a formatted {@link String}
-     * @see DefaultFormatStringBuilder#getSortedString(Representation, Comparator)
+     * @see DefaultFormatStringBuilder#getSortedFormattedString(Representation, Comparator)
      */
     @Override
     public String getFormattedString(Representation representation) {
@@ -48,6 +47,6 @@ public class PopulationFormat implements RepresentationFormat{
             stateComparator = stateComparator.reversed();
         }
 
-        return defaultFormatStringBuilder.getSortedString(representation, stateComparator);
+        return defaultFormatStringBuilder.getSortedFormattedString(representation, stateComparator);
     }
 }

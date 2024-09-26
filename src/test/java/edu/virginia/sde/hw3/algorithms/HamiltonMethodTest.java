@@ -5,7 +5,7 @@ import edu.virginia.sde.hw3.State;
 import edu.virginia.sde.hw3.States;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,7 +27,7 @@ class HamiltonMethodTest {
         State VA = new State("Virginia", 8631393);
         State WV = new State("West Virginia", 1793716);
 
-        States states = new States(List.of(DE, MD, PA, VA, WV));
+        States states = new States(Set.of(DE, MD, PA, VA, WV));
         HamiltonMethod hamiltonMethod = new HamiltonMethod();
         Representation representation = hamiltonMethod.getRepresentation(states, 25);
 
