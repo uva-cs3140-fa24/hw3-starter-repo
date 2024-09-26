@@ -37,9 +37,8 @@ class StatesTest {
     void add_newState_invalidDuplicateName() {
         State virginia2 = new State("Virginia", 125);
 
-        DuplicateStateNameException exception = assertThrows(DuplicateStateNameException.class, () -> {
-            states.add(virginia2);
-        });
+        DuplicateStateNameException exception = assertThrows(DuplicateStateNameException.class,
+                () -> states.add(virginia2));
 
         assertEquals(exception.getAddedState(), virginia2);
 

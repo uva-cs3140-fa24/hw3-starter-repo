@@ -5,7 +5,6 @@ import edu.virginia.sde.hw3.States;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class CSVInputFileTest {
         CSVInputFile stateCSVFile = new CSVInputFile(getResource(TEST_CSV_FILE));
 
         States states = stateCSVFile.getStates();
-        assertIterableEquals(new HashSet(Set.of(
+        assertIterableEquals(new HashSet<>(Set.of(
                 new State("Delaware", 989948),
                 new State("Maryland", 6177224),
                 new State("Pennsylvania", 13002700),

@@ -5,9 +5,14 @@ import edu.virginia.sde.hw3.State;
 import static edu.virginia.sde.hw3.io.BadCSVLineFormatException.BadFormatReason;
 
 public class CSVStateLine {
-    private CSVInputHeadings headings;
-    private String line;
-    private String[] lineData;
+    /** The headings for the CSV file */
+    private final CSVInputHeadings headings;
+
+    /** The raw line contents */
+    private final String line;
+
+    /** The line contents split by commas */
+    private final String[] lineData;
 
     public CSVStateLine(String line, CSVInputHeadings headings) throws BadCSVLineFormatException {
         this.headings = headings;
