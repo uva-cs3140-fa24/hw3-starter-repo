@@ -37,9 +37,9 @@ public class DefaultFormatStringBuilder {
         states.sort(stateComparator);
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("%-15s|%20s|%5s\n".formatted("State", "Population", "Reps"));
+        stringBuilder.append("%-15s|%19s |%5s\n".formatted("State", "Population", "Reps"));
         for (State state : states) {
-            stringBuilder.append(String.format("%-15s|%20s|%5s\n",
+            stringBuilder.append(String.format("%-15s|%19s |%5s\n",
                     state.name(),
                     state.population(),
                     representation.getSeats(state)));
