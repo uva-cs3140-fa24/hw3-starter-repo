@@ -136,7 +136,7 @@ public class Arguments {
         if (index == -1) {
             return Optional.empty();
         }
-        if (args.size() < index + 1) {
+        if (args.size() <= index + 1) {
             throw new IllegalArgumentException("No file specified after --out argument");
         }
 
