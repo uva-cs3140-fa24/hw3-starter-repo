@@ -2,15 +2,23 @@ package edu.virginia.sde.hw3.io;
 
 import java.util.List;
 
+/**
+ * This exception is thrown when an input tabular file is missing required columns
+ */
 public class MissingColumnHeadersException extends IllegalArgumentException {
     private final List<String> missingHeaders;
 
+    /**
+     * Constructs a new MissingColumnHeadersException with a list of missing column headers.
+     *
+     * @param values the names of the missing columns
+     */
     public MissingColumnHeadersException(String... values) {
         super(getErrorMessage(values));
         this.missingHeaders = List.of(values);
     }
 
-    public static String getErrorMessage(String... values){
+    private static String getErrorMessage(String... values){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Input file is missing required column headers.\nMissing column labels:\n");
         for (String value : values) {

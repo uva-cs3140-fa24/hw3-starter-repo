@@ -13,6 +13,12 @@ import java.util.List;
  */
 public class CSVOutputFormat implements RepresentationFormat{
 
+    /**
+     * Generates a formatted CSV string from the given Representation for writing to a file.
+     *
+     * @param representation the Representation containing the states and their apportioned number of seats
+     * @return a formatted CSV string with states and their corresponding seat allocation
+     */
     @Override
     public String getFormattedString(Representation representation) {
         List<State> sortedStates = new ArrayList<>(representation.getStates());

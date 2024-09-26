@@ -7,8 +7,11 @@ import java.util.*;
  * on this group of States.
  */
 public class States {
+
     /** The collection of states */
     private final Set<State> states;
+
+    /** A set of the state names already in the collection */
     private final Set<String> stateNames;
 
     /**

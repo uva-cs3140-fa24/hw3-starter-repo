@@ -39,6 +39,10 @@ import java.io.IOException;
  * </ul>
  */
 public class Main {
+    /**
+     * Main method for running from command line arguments
+     * @param args the command line arguments from terminal
+     */
     public static void main(String[] args) {
         Arguments arguments = new Arguments(args);
 

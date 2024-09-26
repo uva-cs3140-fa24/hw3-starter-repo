@@ -14,6 +14,13 @@ public class CSVStateLine {
     /** The line contents split by commas */
     private final String[] lineData;
 
+    /**
+     * Constructs a CSVStateLine instance from a given CSV line and headings.
+     *
+     * @param line the string representation of a line from a CSV file.
+     * @param headings the CSVInputHeadings object representing the column headings.
+     * @throws BadCSVLineFormatException if the number of columns in the line does not match the number of columns in the headings.
+     */
     public CSVStateLine(String line, CSVInputHeadings headings) throws BadCSVLineFormatException {
         this.headings = headings;
         this.line = line;
@@ -23,6 +30,11 @@ public class CSVStateLine {
         }
     }
 
+    /**
+     * Parse a line in a CSV file to retrieve a State object.
+     * @return the generated {@link State} object
+     * @throws BadCSVLineFormatException if the line is incorrectly formatted.
+     */
     public State getState() throws BadCSVLineFormatException {
         String name = lineData[headings.getStateNameColumnIndex()].strip();
         if (name.isEmpty()) {

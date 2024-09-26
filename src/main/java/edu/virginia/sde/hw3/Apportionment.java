@@ -36,7 +36,7 @@ public class Apportionment {
 
     /**
      * Get the results of the apportionment
-     * @return {@link Representation}
+     * @return {@link Representation} with the allocation of seats in the House of Representatives to the States
      */
     public Representation getRepresentation() {
         States states = stateSource.getStates();

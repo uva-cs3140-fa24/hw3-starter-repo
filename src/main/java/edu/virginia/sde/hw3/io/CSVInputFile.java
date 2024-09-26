@@ -16,15 +16,14 @@ import java.util.Optional;
  * See sample_inputs/part1_input.csv and sample_inputs/part2_input.csv for examples
  */
 public class CSVInputFile implements StateSource {
-
-    /** the CSV file */
-
+    /** CSV file name */
     private final String filename;
+
+    /** The CSV file */
     private final File csvFile;
 
+    /** The CSV headers */
     private CSVInputHeadings headings;
-
-
 
     /**
      * Creates a CSVStateFile object
