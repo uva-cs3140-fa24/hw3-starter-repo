@@ -1,4 +1,4 @@
-# Homework 2 - Testing
+# Homework 3 - Streams and Incremental Development
 
 ## Authors
 1) Name, netid, [GitHub profile name]
