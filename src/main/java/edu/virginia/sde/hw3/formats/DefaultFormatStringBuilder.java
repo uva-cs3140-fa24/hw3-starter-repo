@@ -48,8 +48,11 @@ public class DefaultFormatStringBuilder {
     String getSortedFormattedString(Representation representation, Comparator<State> stateComparator) {
         List<State> states = new ArrayList<>(representation.getStates());
 
+        // TODO - replace the rest of the code in this method with a stream
+        // As a hint, you no longer need to use a StringBuilder
+        // You can use the Collectors.joining method to concatenate strings
+        // return states.stream()
         states.sort(stateComparator);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("%-15s|%19s |%5s\n".formatted("State", "Population", "Reps"));
         for (State state : states) {

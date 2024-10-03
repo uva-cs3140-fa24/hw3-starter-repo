@@ -53,6 +53,10 @@ public class HamiltonMethod implements ApportionmentMethod {
         var remainders = states.getRemainders(divisor);
         var remainingRepresentatives = numRepresentatives - representation.getAllocatedSeats();
 
+        // TODO - replace the code down to the end of the for loop with a stream that adds the "bonus" representatives
+        // Hint: your terminal operation should be a forEach
+        // quotas.entrySet().stream()  // OR
+        // quotas.keySet().stream() // OR
         var remainderEntries = new ArrayList<>(remainders.entrySet());
         remainderEntries.sort(Entry.<State, Double>comparingByValue().reversed());
 
@@ -60,6 +64,7 @@ public class HamiltonMethod implements ApportionmentMethod {
             State state = remainderEntries.get(index).getKey();
             representation.addSeats(state, 1);
         }
+        // TODO - this is the end of the code to replace with a stream
 
         return representation;
     }

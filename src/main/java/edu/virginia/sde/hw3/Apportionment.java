@@ -18,6 +18,8 @@ import edu.virginia.sde.hw3.algorithms.ApportionmentMethod;
 import edu.virginia.sde.hw3.algorithms.UnsolvableApportionmentException;
 import edu.virginia.sde.hw3.io.StateSource;
 
+import java.io.IOException;
+
 /**
  * This class processes the Apportionment by getting the list of states from the {@link StateSource} and calling the
  * {@link ApportionmentMethod} to get the {@link Representation}.
@@ -53,12 +55,16 @@ public class Apportionment {
      * @return {@link Representation} with the allocation of seats in the House of Representatives to the States
      */
     public Representation getRepresentation() {
-        States states = stateSource.getStates();
-        if (states.isEmpty() || states.getTotalPopulation() <= 0) {
-            String errorMessage = "Cannot apportion representatives as no states with a positive population were provided";
-            throw new UnsolvableApportionmentException(errorMessage);
-        }
+        try {
+            States states = stateSource.getStates();
+            if (states.isEmpty() || states.getTotalPopulation() <= 0) {
+                String errorMessage = "Cannot apportion representatives as no states with a positive population were provided";
+                throw new UnsolvableApportionmentException(errorMessage);
+            }
 
-        return apportionmentMethod.getRepresentation(states, targetRepresentatives);
+            return apportionmentMethod.getRepresentation(states, targetRepresentatives);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

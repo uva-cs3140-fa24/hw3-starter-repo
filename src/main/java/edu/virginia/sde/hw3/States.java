@@ -97,6 +97,8 @@ public class States {
      * @return the combined population of every state
      */
     public int getTotalPopulation() {
+        // TODO - replace the code in this method with a stream
+        // return states.stream()
         int sum = 0;
         for (State state : states) {
             int population = state.population();
@@ -121,6 +123,8 @@ public class States {
      * @return A mapping of states to their floating-point quotas
      */
     public Map<State, Double> getQuotas(double divisor) {
+        // TODO - replace the code in this method with a stream
+        // return states.stream()
         Map<State, Double> quotas = new HashMap<>();
         for (State state : states) {
             quotas.put(state, state.population() / divisor);
@@ -136,6 +140,9 @@ public class States {
      */
     public Map<State, Integer> getRoundedDownQuotas(double divisor) {
         Map<State, Double> quotas = getQuotas(divisor);
+        // TODO - replace the rest of the code in this method with a stream
+        // return quotas.entrySet().stream()  // OR
+        // return quotas.keySet().stream()
         Map<State, Integer> roundedDownQuotas = new HashMap<>();
         for (State state : quotas.keySet()) {
             roundedDownQuotas.put(state, (int) Math.floor(quotas.get(state)));
@@ -151,6 +158,9 @@ public class States {
      */
     public Map<State, Double> getRemainders(double divisor) {
         Map<State, Double> quotas = getQuotas(divisor);
+        // TODO - replace the rest of the code in this method with a stream
+        // return quotas.entrySet().stream()  // OR
+        // return quotas.keySet().stream()
         Map<State, Double> remainders = new HashMap<>();
         for (State state : quotas.keySet()) {
             remainders.put(state,  quotas.get(state) - Math.floor(quotas.get(state)));

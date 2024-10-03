@@ -70,7 +70,7 @@ public class CSVInputFile implements StateSource {
      * @return a {@link List} of {@link State} objects
      */
     @Override
-    public States getStates() {
+    public States getStates() throws IOException {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
             String headerRow = bufferedReader.readLine();
             headings = CSVInputHeadings.getHeadings(headerRow);
@@ -83,8 +83,6 @@ public class CSVInputFile implements StateSource {
                 lineNumber++;
             }
             return states;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
