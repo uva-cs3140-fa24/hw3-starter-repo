@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static edu.virginia.sde.hw3.io.BadCSVLineFormatException.BadFormatReason;
 
 public class CSVStateLineTest {
-    public static CSVInputHeadings simpleHeadings = CSVInputHeadings.getHeadings("State,Population");
-    public static CSVInputHeadings extraHeadings = CSVInputHeadings.getHeadings(
+    public static final CSVInputHeadings simpleHeadings = CSVInputHeadings.getHeadings("State,Population");
+    public static final CSVInputHeadings extraHeadings = CSVInputHeadings.getHeadings(
             "ID, State, Capital City, Year Ratified, Population, Nickname");
 
     @Test

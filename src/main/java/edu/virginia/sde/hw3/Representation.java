@@ -25,7 +25,7 @@ public class Representation implements Iterable<State>{
     /**
      * A mapping of {@link State}s to the number of allocated seats in congress
      */
-    Map<State, Integer> representation;
+    private final Map<State, Integer> representation;
 
     /**
      * Allows direct injection of initial representation Map

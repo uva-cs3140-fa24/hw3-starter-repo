@@ -21,7 +21,7 @@ public class DuplicateStateNameException extends RuntimeException {
     /** The state added which caused the exception */
     private final State addedState;
 
-    /** The set of states when the execption was thrown */
+    /** The set of states when the exception was thrown */
     private final States states;
 
     /**

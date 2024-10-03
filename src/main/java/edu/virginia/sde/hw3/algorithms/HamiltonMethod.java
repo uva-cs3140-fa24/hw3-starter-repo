@@ -54,7 +54,7 @@ public class HamiltonMethod implements ApportionmentMethod {
         var remainingRepresentatives = numRepresentatives - representation.getAllocatedSeats();
 
         // TODO - replace the code down to the end of the for loop with a stream that adds the "bonus" representatives
-        // Hint: your terminal operation should be a forEach
+        // Hint: your stream's terminal operation should be a forEach
         // quotas.entrySet().stream()  // OR
         // quotas.keySet().stream() // OR
         var remainderEntries = new ArrayList<>(remainders.entrySet());
