@@ -20,7 +20,6 @@ import edu.virginia.sde.hw3.State;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represent a Default format for displaying an apportionment result to console. This format will display as:<br>
