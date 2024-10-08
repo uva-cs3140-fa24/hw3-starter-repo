@@ -20,6 +20,7 @@ import edu.virginia.sde.hw3.State;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represent a Default format for displaying an apportionment result to console. This format will display as:<br>
@@ -48,13 +49,15 @@ public class DefaultFormatStringBuilder {
     String getSortedFormattedString(Representation representation, Comparator<State> stateComparator) {
         List<State> states = new ArrayList<>(representation.getStates());
 
+
+        String headerRow = "%-15s|%19s |%5s\\n\".formatted(\"State\", \"Population\", \"Reps\")";
         // TODO - replace the rest of the code in this method with a stream
         // As a hint, you no longer need to use a StringBuilder
         // You can use the Collectors.joining method to concatenate strings
-        // return states.stream()
+        // return headerRow + states.stream()
         states.sort(stateComparator);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("%-15s|%19s |%5s\n".formatted("State", "Population", "Reps"));
+        stringBuilder.append(headerRow);
         for (State state : states) {
             stringBuilder.append(String.format("%-15s|%19s |%5s\n",
                     state.name(),
