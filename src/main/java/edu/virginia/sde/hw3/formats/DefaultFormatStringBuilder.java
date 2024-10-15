@@ -49,7 +49,7 @@ public class DefaultFormatStringBuilder {
         List<State> states = new ArrayList<>(representation.getStates());
 
 
-        String headerRow = "%-15s|%19s |%5s\\n\".formatted(\"State\", \"Population\", \"Reps\")";
+        String headerRow = "%-15s|%19s |%5s\n".formatted("State", "Population", "Reps");
         // TODO - replace the rest of the code in this method with a stream
         // As a hint, you no longer need to use a StringBuilder
         // You can use the Collectors.joining method to concatenate strings

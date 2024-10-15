@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 public class CSVInputFileTest {
     @Test
     public void getStates() throws IOException {
-        final String TEST_CSV_FILE = "csv_test_files\\states.csv";
+        final String TEST_CSV_FILE = "csv_test_files/states.csv";
         CSVInputFile stateCSVFile = new CSVInputFile(getResource(TEST_CSV_FILE));
 
         States states = stateCSVFile.getStates();
