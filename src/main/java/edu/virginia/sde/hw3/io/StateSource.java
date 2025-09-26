@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 public interface StateSource {
     /**
-     * Retrives a group of {@link State}s from a data source
+     * Retries a group of {@link State}s from a data source
      * @return a group of {@link States} from the data source
      */
     States getStates() throws IOException;
