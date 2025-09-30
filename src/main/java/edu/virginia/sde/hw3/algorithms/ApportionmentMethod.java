@@ -25,8 +25,8 @@ public interface ApportionmentMethod {
     /**
      * Gets the results of an apportionment for a group of states and a particular target number of representatives
      * @param states the group of {@link States} to allocate representatives to
-     * @param numRepresentatives the number of seats in Congress to allocate
+     * @param seats the number of seats in Congress to allocate
      * @return {@link Representation}
      */
-    Representation getRepresentation(States states, int numRepresentatives);
+    Representation getRepresentation(States states, int seats);
 }

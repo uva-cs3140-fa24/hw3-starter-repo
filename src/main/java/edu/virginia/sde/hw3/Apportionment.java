@@ -32,22 +32,22 @@ public class Apportionment {
     private final ApportionmentMethod apportionmentMethod;
 
     /** The number of representatives to allocate */
-    private final int targetRepresentatives;
+    private final int representatives;
 
     /**
      * Creates an Apportionment object
      * @param stateSource the data source for state information
      * @param apportionmentMethod the apportionment algorithm to use
-     * @param targetRepresentatives the number of representatives to allocate
+     * @param representatives the number of representatives to allocate
      */
     public Apportionment(
             StateSource stateSource,
             ApportionmentMethod apportionmentMethod,
-            int targetRepresentatives
+            int representatives
     ) {
         this.stateSource = stateSource;
         this.apportionmentMethod = apportionmentMethod;
-        this.targetRepresentatives = targetRepresentatives;
+        this.representatives = representatives;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Apportionment {
                 throw new UnsolvableApportionmentException(errorMessage);
             }
 
-            return apportionmentMethod.getRepresentation(states, targetRepresentatives);
+            return apportionmentMethod.getRepresentation(states, representatives);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

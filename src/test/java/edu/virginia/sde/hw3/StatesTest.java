@@ -44,7 +44,7 @@ class StatesTest {
         Set<State> statesSet = states.getStates();
         assertEquals(4, statesSet.size());
         assertTrue(statesSet.contains(md));
-        assertTrue(states.getStateNames().contains("Maryland"));
+        assertTrue(states.getNames().contains("Maryland"));
     }
 
     @Test

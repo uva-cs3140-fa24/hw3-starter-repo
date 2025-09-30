@@ -32,7 +32,7 @@ import java.util.List;
  *
  * Sorted by a specific {@link Comparator}
  */
-public class DefaultFormatStringBuilder {
+public class SortedStateTableFormat {
     /**
      * Generates a table-link string for displaying the results an apportionment console. <br>
      *  <pre>
@@ -45,7 +45,7 @@ public class DefaultFormatStringBuilder {
      * @param stateComparator how the states are sorted in the table
      * @return a formatted {@link String}
      */
-    String getSortedFormattedString(Representation representation, Comparator<State> stateComparator) {
+    String getSortedTableString(Representation representation, Comparator<State> stateComparator) {
         List<State> states = new ArrayList<>(representation.getStates());
 
 

@@ -53,20 +53,20 @@ public class Representation implements Iterable<State>{
     /**
      * Sets the number of seats for a particular {@link State}, overwriting any previous value if present
      * @param state the state to set the number of seats for
-     * @param numberOfSeats the number of seats to allocate to the state
+     * @param seats the number of seats to allocate to the state
      */
-    public void setSeats(State state, int numberOfSeats) {
-        representation.put(state, numberOfSeats);
+    public void setSeats(State state, int seats) {
+        representation.put(state, seats);
     }
 
     /**
      * Adds the number of seats to a particular state. Note that this behaves the same as
      * {@link Representation#setSeats(State, int)} when the state is not present in the representation
      * @param state the {@link State} to add seats to
-     * @param numberOfSeats the number of seats to add to that state
+     * @param seats the number of seats to add to that state
      */
-    public void addSeats(State state, int numberOfSeats) {
-        int totalRepresentatives = numberOfSeats + representation.getOrDefault(state, 0);
+    public void addSeats(State state, int seats) {
+        int totalRepresentatives = seats + representation.getOrDefault(state, 0);
         representation.put(state, totalRepresentatives);
     }
 

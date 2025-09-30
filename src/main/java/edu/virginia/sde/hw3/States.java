@@ -88,7 +88,7 @@ public class States implements Iterable<State> {
      * Returns a set of state names in the collection.
      * @return an unmodifiable set containing the names of all states
      */
-    public Set<String> getStateNames() {
+    public Set<String> getNames() {
         return Collections.unmodifiableSet(stateNames);
     }
 
@@ -109,11 +109,11 @@ public class States implements Iterable<State> {
 
     /**
      * Returns the average population per seat in US House of Representatives for the group of states
-     * @param numberOfSeats the total number of seats in the House of Representatives
+     * @param seats the total number of seats in the House of Representatives
      * @return the average number of residents per seat for all states combined
      */
-    public double getAverageRepresentation(int numberOfSeats) {
-        return (double) getTotalPopulation() / numberOfSeats;
+    public double getAverageRepresentation(int seats) {
+        return (double) getTotalPopulation() / seats;
     }
 
     /**

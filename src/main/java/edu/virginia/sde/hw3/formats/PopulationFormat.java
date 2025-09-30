@@ -23,7 +23,7 @@ import java.util.Comparator;
  * Display states sorted by population.
  */
 public class PopulationFormat implements RepresentationFormat{
-    private final DefaultFormatStringBuilder defaultFormatStringBuilder = new DefaultFormatStringBuilder();
+    private final SortedStateTableFormat sortedStateTableFormat = new SortedStateTableFormat();
 
     /**
      * Determines whether states are sorted by population in either {@link DisplayOrder#ASCENDING} or
@@ -52,7 +52,7 @@ public class PopulationFormat implements RepresentationFormat{
      * the object's configuration.
      * @param representation {@link Representation} - the results of an apportionment
      * @return a formatted {@link String}
-     * @see DefaultFormatStringBuilder#getSortedFormattedString(Representation, Comparator)
+     * @see SortedStateTableFormat#getSortedTableString(Representation, Comparator)
      */
     @Override
     public String getFormattedString(Representation representation) {
@@ -61,6 +61,6 @@ public class PopulationFormat implements RepresentationFormat{
             stateComparator = stateComparator.reversed();
         }
 
-        return defaultFormatStringBuilder.getSortedFormattedString(representation, stateComparator);
+        return sortedStateTableFormat.getSortedTableString(representation, stateComparator);
     }
 }
