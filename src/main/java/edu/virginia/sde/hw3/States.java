@@ -20,7 +20,7 @@ import java.util.*;
  * This represents a group of States. This class contains several mathematical functions useful for apportionment
  * on this group of States.
  */
-public class States {
+public class States implements Iterable<State> {
 
     /** The collection of states */
     private final Set<State> states;
@@ -166,5 +166,10 @@ public class States {
             remainders.put(state,  quotas.get(state) - Math.floor(quotas.get(state)));
         }
         return remainders;
+    }
+
+    @Override
+    public Iterator<State> iterator() {
+        return states.iterator();
     }
 }
